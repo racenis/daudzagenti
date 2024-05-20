@@ -1,3 +1,3 @@
 # Daudzaģentu sistēmas simulācijas pirmkods
 
-Te būs ielikts pirmkods.
+Pirmkods pašlaik tiek gatavos publikācijai, lūdzu atgriezieties pēc 1 - 2 dienām.
