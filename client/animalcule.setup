@@ -1,0 +1,11 @@
+world ../worlds/gridworld.lisp
+light 2.5 10.0 2.5 3.5 3.5 3.5
+light 7.5 -10.0 7.5 1.0 1.0 1.0
+ambient 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+background 0.0 0.0 0.0
+# agent ../agents/tablet.lisp
+# agent ../agents/forbidden-gherkin.lisp
+agent ../agents/animalcule.lisp
+agent ../agents/obstacle.lisp
+prototype ../agents/obstacle.lisp
+prototype ../agents/tablet.lisp

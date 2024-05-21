@@ -1,7 +1,7 @@
 default: repl
 
 repl: main.c list.c list.h value.h value.c eval.h eval.c api.h api.c ipc.h ipc.c script.h script.c agent.h agent.c world.h world.c chemical.h chemical.c vector.h vector.c stimulus.h stimulus.c action.h action.c context.h context.c
-	gcc vector.c value.c list.c script.c eval.c api.c ipc.c chemical.c agent.h agent.c world.c action.c stimulus.c context.c main.c -o repl.exe -I. -lws2_32 -no-pie -static
+	gcc vector.c value.c list.c script.c eval.c api.c ipc.c chemical.c agent.h agent.c world.c action.c stimulus.c context.c main.c -o repl.exe -I. -lws2_32 -no-pie -static -static-libstdc++ -static-libgcc
 	
 library:
 	gcc -c list.c -o list.o -I.
