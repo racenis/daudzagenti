@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['sector_5fair_0',['SECTOR_AIR',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9ea31c8dd9bfed61bac33c80e5e4e400401',1,'world.h']]],
+  ['sector_5fsolid_5fceiling_1',['SECTOR_SOLID_CEILING',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9eaea3ee70774bd69f75a18794003d63764',1,'world.h']]],
+  ['sector_5fsolid_5ffloor_2',['SECTOR_SOLID_FLOOR',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9eadab5cae397d0b205de4165024355f6c4',1,'world.h']]],
+  ['sector_5fsolid_5fwall_5f1_3',['SECTOR_SOLID_WALL_1',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9ea741dcfddbd0dc30cc2173b8358be98df',1,'world.h']]],
+  ['sector_5fsolid_5fwall_5f2_4',['SECTOR_SOLID_WALL_2',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9ea52517a951e4d2d90115df81eea588719',1,'world.h']]],
+  ['sector_5fsolid_5fwall_5f3_5',['SECTOR_SOLID_WALL_3',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9ea25e969c8ef53f4733f4fb146cbc73e1b',1,'world.h']]],
+  ['sector_5fsolid_5fwall_5f4_6',['SECTOR_SOLID_WALL_4',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9eaa7b80e1bd7c16f7ed4ff47776c2f6b64',1,'world.h']]],
+  ['sector_5fwater_7',['SECTOR_WATER',['../world_8h.html#a05589fbab0657f08285ebdfe93f5ec9ea732afcc7fc91f14e64daca3c67289704',1,'world.h']]],
+  ['shape_5fcube_8',['SHAPE_CUBE',['../vector_8h.html#ac36f475ca5b446f4fde4c9b90bec77c8a20dffe07a4e35bfaf8f8e1495eb8c00b',1,'vector.h']]],
+  ['shape_5fcylinder_9',['SHAPE_CYLINDER',['../vector_8h.html#ac36f475ca5b446f4fde4c9b90bec77c8a62eea2af0cd8bf0530c0799ce72b93cf',1,'vector.h']]],
+  ['shape_5fnone_10',['SHAPE_NONE',['../vector_8h.html#ac36f475ca5b446f4fde4c9b90bec77c8a7cd1179e1e28f28bedec532190654441',1,'vector.h']]],
+  ['shape_5fsphere_11',['SHAPE_SPHERE',['../vector_8h.html#ac36f475ca5b446f4fde4c9b90bec77c8ac7a9839306104e6733f1adc2bb66274b',1,'vector.h']]],
+  ['stimulus_5fchemical_12',['STIMULUS_CHEMICAL',['../stimulus_8h.html#a0411cd49bb5b71852cecd93bcbf0ca2da1090dfb4ea59d2ab22f70dde880ac879',1,'stimulus.h']]],
+  ['stimulus_5flast_13',['STIMULUS_LAST',['../stimulus_8h.html#a0411cd49bb5b71852cecd93bcbf0ca2dad5b3250c3b19a1b95a3abbc7dc89bc33',1,'stimulus.h']]],
+  ['stimulus_5fsmell_14',['STIMULUS_SMELL',['../stimulus_8h.html#a0411cd49bb5b71852cecd93bcbf0ca2dab9de11a6033fc650c08a214f5633bb3b',1,'stimulus.h']]],
+  ['stimulus_5fsound_15',['STIMULUS_SOUND',['../stimulus_8h.html#a0411cd49bb5b71852cecd93bcbf0ca2da7eede5b2100355d799e9b04f2bf5dbaf',1,'stimulus.h']]],
+  ['stimulus_5ftouch_16',['STIMULUS_TOUCH',['../stimulus_8h.html#a0411cd49bb5b71852cecd93bcbf0ca2da8dbeaae5efc30137d2a1298ba3c11d11',1,'stimulus.h']]],
+  ['stimulus_5fvisual_17',['STIMULUS_VISUAL',['../stimulus_8h.html#a0411cd49bb5b71852cecd93bcbf0ca2da72c942334871770ffb755ee0bbf1992f',1,'stimulus.h']]]
+];
