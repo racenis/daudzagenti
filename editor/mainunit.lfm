@@ -1,0 +1,555 @@
+object MainForm: TMainForm
+  Left = 478
+  Height = 460
+  Top = 241
+  Width = 660
+  BorderStyle = bsSingle
+  Caption = 'TCP/IP IPC Turnip SQL Client'
+  ClientHeight = 460
+  ClientWidth = 660
+  Menu = MainMenu
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '3.0.0.3'
+  object StatusBar: TStatusBar
+    Left = 0
+    Height = 20
+    Top = 440
+    Width = 660
+    Panels = <    
+      item
+        Text = 'Ready.'
+        Width = 50
+      end    
+      item
+        Bevel = pbRaised
+        Text = 'Hello'
+        Width = 50
+      end    
+      item
+        Alignment = taCenter
+        Text = 'I need eat'
+        Width = 50
+      end>
+    SimpleText = 'Ready.'
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 440
+    Top = 0
+    Width = 662
+    ActivePage = AgentTab
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 0
+    TabOrder = 1
+    object AgentTab: TTabSheet
+      Caption = 'Agents'
+      ClientHeight = 414
+      ClientWidth = 654
+      object AgentList: TStringGrid
+        Left = 0
+        Height = 379
+        Top = 0
+        Width = 456
+        ColCount = 4
+        Enabled = False
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goSmoothScroll]
+        TabOrder = 0
+        TitleStyle = tsNative
+        OnSelection = AgentListSelection
+        ColWidths = (
+          40
+          99
+          64
+          64
+        )
+        Cells = (
+          4
+          0
+          0
+          'ID'
+          1
+          0
+          'Name'
+          2
+          0
+          'Class'
+          3
+          0
+          'Prototype'
+        )
+      end
+      object AgentsRightPanel: TPanel
+        Left = 456
+        Height = 416
+        Top = 0
+        Width = 200
+        BevelOuter = bvNone
+        ClientHeight = 416
+        ClientWidth = 200
+        Enabled = False
+        TabOrder = 1
+        object AgentProperties: TValueListEditor
+          Left = 0
+          Height = 135
+          Top = 0
+          Width = 200
+          FixedCols = 0
+          RowCount = 2
+          TabOrder = 0
+          TitleStyle = tsNative
+          OnSetEditText = AgentPropertiesSetEditText
+          ColWidths = (
+            64
+            132
+          )
+        end
+        object KillButton: TButton
+          Left = 8
+          Height = 25
+          Top = 384
+          Width = 184
+          Caption = 'Kill'
+          TabOrder = 1
+          OnClick = KillButtonClick
+        end
+      end
+      object RefreshAgentList: TButton
+        Left = 0
+        Height = 25
+        Top = 384
+        Width = 75
+        Caption = 'Refresh'
+        Enabled = False
+        TabOrder = 2
+        OnClick = RefreshAgentListClick
+      end
+    end
+    object PrototypeTab: TTabSheet
+      Caption = 'Prototypes'
+      ClientHeight = 414
+      ClientWidth = 654
+      object PrototypeList: TStringGrid
+        Left = 0
+        Height = 376
+        Top = 0
+        Width = 456
+        ColCount = 3
+        Enabled = False
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goSmoothScroll]
+        TabOrder = 0
+        TitleStyle = tsNative
+        OnSelection = PrototypeListSelection
+        ColWidths = (
+          76
+          89
+          255
+        )
+        Cells = (
+          3
+          0
+          0
+          'Name'
+          1
+          0
+          'Category'
+          2
+          0
+          'Description'
+        )
+      end
+      object PrototypesRightPanel: TPanel
+        Left = 456
+        Height = 416
+        Top = 0
+        Width = 202
+        BevelOuter = bvNone
+        ClientHeight = 416
+        ClientWidth = 202
+        Enabled = False
+        TabOrder = 1
+        object InjectPrototype: TButton
+          Left = 8
+          Height = 25
+          Top = 384
+          Width = 88
+          Caption = 'Inject'
+          TabOrder = 0
+          OnClick = InjectPrototypeClick
+        end
+        object InjectPrototypeAt: TButton
+          Left = 104
+          Height = 25
+          Top = 384
+          Width = 88
+          Caption = 'Inject At'
+          TabOrder = 1
+          OnClick = InjectPrototypeAtClick
+        end
+        object InjectAtX: TEdit
+          Left = 8
+          Height = 21
+          Top = 352
+          Width = 56
+          TabOrder = 2
+          Text = '0'
+        end
+        object InjectAtY: TEdit
+          Left = 72
+          Height = 21
+          Top = 352
+          Width = 56
+          TabOrder = 3
+          Text = '0'
+        end
+        object InjectAtZ: TEdit
+          Left = 136
+          Height = 21
+          Top = 352
+          Width = 53
+          TabOrder = 4
+          Text = '0'
+        end
+        object Label1: TLabel
+          Left = 56
+          Height = 13
+          Top = 336
+          Width = 82
+          Caption = 'Injection Position'
+        end
+      end
+      object RefreshPrototypeList: TButton
+        Left = 0
+        Height = 25
+        Top = 384
+        Width = 75
+        Caption = 'Refresh'
+        Enabled = False
+        TabOrder = 2
+        OnClick = RefreshPrototypeListClick
+      end
+    end
+    object SectorTab: TTabSheet
+      Caption = 'Sectors'
+      ClientHeight = 414
+      ClientWidth = 654
+      object SectorRightPanel: TPanel
+        Left = 456
+        Height = 416
+        Top = 0
+        Width = 200
+        BevelOuter = bvNone
+        Enabled = False
+        TabOrder = 0
+      end
+      object SectorList: TStringGrid
+        Left = 0
+        Height = 379
+        Top = 0
+        Width = 456
+        ColCount = 3
+        Enabled = False
+        FixedCols = 0
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goSmoothScroll]
+        TabOrder = 1
+        TitleStyle = tsNative
+        OnSelection = SectorListSelection
+        ColWidths = (
+          73
+          202
+          80
+        )
+        Cells = (
+          3
+          0
+          0
+          'ID'
+          1
+          0
+          'Name'
+          2
+          0
+          'Flags'
+        )
+      end
+      object RefreshSectorList: TButton
+        Left = 0
+        Height = 25
+        Top = 384
+        Width = 75
+        Caption = 'Refresh'
+        Enabled = False
+        TabOrder = 2
+        OnClick = RefreshSectorListClick
+      end
+    end
+    object ChemicalTab: TTabSheet
+      Caption = 'Chemicals'
+      ClientHeight = 414
+      ClientWidth = 654
+      object ChemicalPanelTop: TPanel
+        Left = 0
+        Height = 40
+        Top = 0
+        Width = 654
+        Anchors = [akTop, akLeft, akRight]
+        BevelInner = bvLowered
+        BevelOuter = bvNone
+        ClientHeight = 40
+        ClientWidth = 654
+        TabOrder = 0
+        object ComboChemical: TComboBox
+          Left = 8
+          Height = 21
+          Top = 8
+          Width = 100
+          Enabled = False
+          ItemHeight = 13
+          TabOrder = 0
+          Text = 'Select'
+          OnChange = ComboChemicalChange
+        end
+        object RadioChemicalsAgents: TRadioButton
+          Left = 112
+          Height = 17
+          Top = 10
+          Width = 54
+          Caption = 'Agents'
+          Enabled = False
+          TabOrder = 1
+          OnChange = RadioChemicalsAgentsChange
+        end
+        object RadioChemicalsSectors: TRadioButton
+          Left = 176
+          Height = 17
+          Top = 10
+          Width = 56
+          Caption = 'Sectors'
+          Enabled = False
+          TabOrder = 2
+          OnChange = RadioChemicalsSectorsChange
+        end
+      end
+      object ChemicalPanelBottom: TPanel
+        Left = 0
+        Height = 40
+        Top = 376
+        Width = 654
+        Anchors = [akLeft, akRight, akBottom]
+        BevelInner = bvLowered
+        BevelOuter = bvNone
+        ClientHeight = 40
+        ClientWidth = 654
+        Enabled = False
+        TabOrder = 1
+        object RefreshChemicals: TButton
+          Left = 8
+          Height = 25
+          Top = 8
+          Width = 75
+          Caption = 'Refresh'
+          TabOrder = 0
+          OnClick = RefreshChemicalsClick
+        end
+        object ChemicalTrackerCheckbox: TCheckBox
+          Left = 91
+          Height = 17
+          Top = 12
+          Width = 46
+          Caption = 'Track'
+          TabOrder = 1
+          OnChange = ChemicalTrackerCheckboxChange
+        end
+      end
+      object ChemicalChart: TChart
+        Left = 0
+        Height = 192
+        Top = 40
+        Width = 656
+        AxisList = <        
+          item
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
+          end        
+          item
+            Alignment = calBottom
+            Marks.LabelBrush.Style = bsClear
+            Minors = <>
+            Title.LabelBrush.Style = bsClear
+          end>
+        Legend.Visible = True
+        Title.Text.Strings = (
+          'TAChart'
+        )
+        object ChemicalSeriesA: TLineSeries
+          Title = 'anima'
+          LinePen.Color = clRed
+        end
+        object ChemicalSeriesB: TLineSeries
+          Title = 'glucose'
+          LinePen.Color = clLime
+        end
+        object ChemicalSeriesC: TLineSeries
+          Title = 'none'
+          LinePen.Color = clYellow
+        end
+        object ChemicalSeriesD: TLineSeries
+          Title = 'none'
+          LinePen.Color = clBlue
+        end
+        object ChemicalSeriesE: TLineSeries
+          Title = 'none'
+          LinePen.Color = clFuchsia
+        end
+        object ChemicalSeriesF: TLineSeries
+          Title = 'none'
+          LinePen.Color = clAqua
+        end
+        object ChemicalSeriesG: TLineSeries
+          Title = 'none'
+          LinePen.Color = clOlive
+        end
+        object ChemicalSeriesH: TLineSeries
+          Title = 'none'
+          LinePen.Color = clTeal
+        end
+      end
+      object ChemicalComboE: TComboBox
+        Left = 544
+        Height = 21
+        Top = 240
+        Width = 100
+        Font.Color = clFuchsia
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 3
+        Text = 'none'
+        OnChange = ChemicalComboEChange
+      end
+      object ChemicalComboF: TComboBox
+        Left = 544
+        Height = 21
+        Top = 272
+        Width = 100
+        Font.Color = clAqua
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 4
+        Text = 'none'
+        OnChange = ChemicalComboFChange
+      end
+      object ChemicalComboG: TComboBox
+        Left = 544
+        Height = 21
+        Top = 304
+        Width = 100
+        Font.Color = clOlive
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 5
+        Text = 'none'
+        OnChange = ChemicalComboGChange
+      end
+      object ChemicalComboH: TComboBox
+        Left = 544
+        Height = 21
+        Top = 336
+        Width = 100
+        Font.Color = clTeal
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 6
+        Text = 'none'
+        OnChange = ChemicalComboHChange
+      end
+      object ChemicalComboA: TComboBox
+        Left = 432
+        Height = 21
+        Top = 240
+        Width = 100
+        Font.Color = clRed
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 7
+        Text = 'anima'
+        OnChange = ChemicalComboAChange
+      end
+      object ChemicalComboB: TComboBox
+        Left = 432
+        Height = 21
+        Top = 272
+        Width = 100
+        Font.Color = clLime
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 8
+        Text = 'glucose'
+        OnChange = ChemicalComboBChange
+      end
+      object ChemicalComboC: TComboBox
+        Left = 432
+        Height = 21
+        Top = 304
+        Width = 100
+        Font.Color = clYellow
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 9
+        Text = 'none'
+        OnChange = ChemicalComboCChange
+      end
+      object ChemicalComboD: TComboBox
+        Left = 432
+        Height = 21
+        Top = 336
+        Width = 100
+        Font.Color = clBlue
+        ItemHeight = 13
+        ParentFont = False
+        TabOrder = 10
+        Text = 'none'
+        OnChange = ChemicalComboDChange
+      end
+    end
+    object VariableTab: TTabSheet
+      Caption = 'Variables'
+    end
+    object NeuronTab: TTabSheet
+      Caption = 'Neurons'
+    end
+  end
+  object MainMenu: TMainMenu
+    Left = 32
+    Top = 352
+    object FileMenuItem: TMenuItem
+      Caption = 'File'
+      object ConnectMenuItem: TMenuItem
+        Caption = 'Connect'
+        OnClick = ConnectMenuItemClick
+      end
+      object DisconnectMenuItem: TMenuItem
+        Caption = 'Disconnect'
+        Enabled = False
+        OnClick = DisconnectMenuItemClick
+      end
+      object Separator1: TMenuItem
+        Caption = '-'
+      end
+      object QuitMenuItem: TMenuItem
+        Caption = 'Quit'
+        ShortCut = 16465
+        OnClick = QuitMenuItemClick
+      end
+    end
+  end
+  object ChemicalTimer: TTimer
+    Enabled = False
+    OnTimer = ChemicalTimerTimer
+    Left = 112
+    Top = 352
+  end
+end
