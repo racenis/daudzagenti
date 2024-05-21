@@ -17,7 +17,8 @@ Programma `repl` ielādēs pasaules un dažu aģentu definīcijas, tad ieies cik
 kurā tā prasīs ievadīt komandu interpretatoram, tad to interpretēs un tad 
 nosimulēs vienu simulācijas takti.
 
-Ierakstot komandu `exit`, interpretators beigs darbu.
+Neierakstot nekādu komandu, interpretators ignorēs to un simulēs vienu simulācijas
+takti. Ierakstot komandu `exit` interpretators beigs darbu.
 
 ## Vizualizācija
 
@@ -44,6 +45,7 @@ iestatīt uz `client` direktoriju.
 `client -setup forbidden-gherkin.setup`
 
 Lai parādītu arī glikozes gradientu:
+
 `client -setup forbidden-gherkin.setup -chemical glucose`
 
 ![bacteria1](docs/images/bacteria1.png)
@@ -54,7 +56,9 @@ Lai parādītu arī glikozes gradientu:
 `client -setup animalcule.setup`
 
 Lai parādītu vienšūņa trajektoriju:
+
 `client -setup animalcule.setup -track animalcule-agent`
+
 Pirms atpauzē ar `Space`, nepieciešams nospies `5` lai ieslēgtu aģentu
 trajektoriju attēlošanu.
 
@@ -63,5 +67,7 @@ trajektoriju attēlošanu.
 ### Tastatūras ievadi
 
 `Space` -- pauzēt/atpauzēt.
+
 `W/A/S/D/Q/E` -- kustināt virtuālo kameru.
+
 `1/2/3/4/5` -- ieslēgt/izslēgt dažādas vizualizācijas.
