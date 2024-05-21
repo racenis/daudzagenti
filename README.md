@@ -44,11 +44,19 @@ iestatīt uz `client` direktoriju.
 
 `client -setup forbidden-gherkin.setup`
 
+Lai parādītu arī baktērijas trajektoriju:
+
+`client -setup forbidden-gherkin.setup -track forbidden-gherkin-agent`
+
+Pirms atpauzē ar `Space`, nepieciešams nospiest `5` lai ieslēgtu aģentu
+trajektoriju attēlošanu.
+
+![bacteria1](docs/images/bacteria1.png)
+
 Lai parādītu arī glikozes gradientu:
 
 `client -setup forbidden-gherkin.setup -chemical glucose`
 
-![bacteria1](docs/images/bacteria1.png)
 ![bacteria2](docs/images/bacteria2.png)
 
 ### Vienšūņa simulācija
@@ -59,7 +67,7 @@ Lai parādītu vienšūņa trajektoriju:
 
 `client -setup animalcule.setup -track animalcule-agent`
 
-Pirms atpauzē ar `Space`, nepieciešams nospies `5` lai ieslēgtu aģentu
+Pirms atpauzē ar `Space`, nepieciešams nospiest `5` lai ieslēgtu aģentu
 trajektoriju attēlošanu.
 
 ![animalcule](docs/images/animalcule.png)
