@@ -334,7 +334,7 @@ static Value set_scale(Context* c, List* p) {
 		return error("Function 'set-scale' _self %i not found.\n", find_self(c));
 	}
 	
-	goetia_api_FireCallbackAgentScaleSet(id, p->data.float32);
+	goetia_api_FireCallbackAgentScaleSet(id, goetia_script_EvaluateValue(c, p->data).float32);
 	
 	return ok;
 }
@@ -349,11 +349,13 @@ static Value set_color(Context* c, List* p) {
 		return error("Function 'set-color' _self %i not found.\n", find_self(c));
 	}
 	
+	
+	
 	goetia_api_FireCallbackAgentColorSet(
 		id,
-		p->data.float32, 
-		p->next->data.float32, 
-		p->next->next->data.float32);
+		goetia_script_EvaluateValue(c, p->data).float32, 
+		goetia_script_EvaluateValue(c, p->next->data).float32, 
+		goetia_script_EvaluateValue(c, p->next->next->data).float32);
 	
 	return ok;
 }
@@ -563,6 +565,87 @@ static Value lobe(Context* c, List* p) {
 	return ok;
 }
 
+static Value instantiate(Context* c, List* p) {
+	if (!p || !p->next) {
+		return error("Function 'instantiate' missing parameters.\n");
+	}
+	
+	Agent* agent = goetia_world_FindAgent(find_self(c));
+	if (!agent) {
+		return error("Function 'instantiate' _self %i not found.\n", find_self(c));
+	}
+	
+	Agent* prototype = goetia_world_FindPrototype(goetia_script_EvaluateValue(c, p->data).atom);
+	
+	if (!prototype) {
+		return error("Function 'instantiate' prototype %i not found.\n", p->data.int32);
+	}
+	
+	// check if have enough chemicals to instantiate
+	for (int i = 0; i < CHEM_LAST; i++) {
+		if (prototype->chemicals->chems[i] > agent->chemicals->chems[i]) {
+			return goetia_value_MakeInt(0);
+		}
+	}
+	
+	if (p->next->data.type != VALUE_ATOM || p->next->data.atom != ATOM_AT) {
+		return error("Function 'instantiate' needs 'at'.\n");
+	}
+	
+	Agent instance = goetia_agent_Copy(prototype);
+	
+	instance.position.x = goetia_script_EvaluateValue(c, p->next->next->data).float32;
+	instance.position.y = goetia_script_EvaluateValue(c, p->next->next->next->data).float32;
+	instance.position.z = goetia_script_EvaluateValue(c, p->next->next->next->next->data).float32;
+	
+	for (int i = 0; i < CHEM_LAST; i++) {
+		agent->chemicals->chems[i] -= instance.chemicals->chems[i];
+	}
+	
+	return goetia_value_MakeInt(goetia_world_InjectAgent(instance));
+}
+
+static Value get(Context* c, List* p) {
+	if (!p || !p->next) {
+		return error("Function 'get' missing parameters.\n");
+	}
+	
+	Agent* target_agent = goetia_world_FindAgent(goetia_script_EvaluateValue(c, p->data).int32);
+	if (!target_agent) {
+		return error("Function 'get' target %i not found.\n", p->data.int32);
+	}
+	
+	atom type = p->next->data.atom;
+	atom subtype;
+	
+	switch (type) {
+		case ATOM_POSITION:
+			subtype = p->next->next->data.atom;
+			switch (subtype) {
+				case ATOM_X:
+					return goetia_value_MakeFloat(target_agent->position.x);
+				case ATOM_Y:
+					return goetia_value_MakeFloat(target_agent->position.y);
+				case ATOM_Z:
+					return goetia_value_MakeFloat(target_agent->position.z);
+			}
+		case ATOM_CATEGORY:
+			subtype = p->next->next->data.atom;
+			switch (subtype) {
+				case ATOM_CATEGORY:
+					return goetia_value_MakeAtom(target_agent->category);
+				case ATOM_VISUAL:
+					return goetia_value_MakeAtom(target_agent->category_visual);
+				case ATOM_TOUCH:
+					return goetia_value_MakeAtom(target_agent->category_tactile);
+			}
+		default:
+			return error("Function 'get' not good parameter.");
+	}
+	
+	return ok;
+}
+
 /// Some additional script functions.
 Value goetia_script_SimulationFunction(Context* c, atom atom, List* expr) {
 	switch (atom) {
@@ -581,6 +664,8 @@ Value goetia_script_SimulationFunction(Context* c, atom atom, List* expr) {
 		case ATOM_SET_COLOR:		return set_color(c, expr);
 		case ATOM_SET_ANIMATION:	return set_animation(c, expr);
 		case ATOM_LOBE:				return lobe(c, expr);
+		case ATOM_INSTANTIATE:		return instantiate(c, expr);
+		case ATOM_GET:				return get(c, expr);
 		default:					break;
 	}
 		

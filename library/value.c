@@ -215,6 +215,7 @@ static char* atom_names[400] = {
 	"sector",
 	"wall",
 	"x",
+	"y",
 	"z",
 	"y-max",
 	"y-min",
@@ -273,6 +274,8 @@ static char* atom_names[400] = {
 	"all-sensor",
 	"float-in-air",
 	"float-in-water",
+	"instantiate",
+	"at"
 };
 static int atom_count = ATOM_LAST_ATOM;
 

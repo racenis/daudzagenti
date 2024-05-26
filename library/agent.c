@@ -66,6 +66,45 @@ Agent goetia_agent_New() {
 	return agent;
 }
 
+/// Creates a copy of an agent.
+Agent goetia_agent_Copy(Agent* other) {
+	Agent agent = goetia_agent_New();
+	
+	agent.description = other->description;
+	
+	agent.category = other->category;
+	agent.category_visual = other->category_visual;
+	agent.category_tactile = other->category_tactile;
+	
+	agent.move_speed = other->move_speed;
+	agent.turn_speed = other->turn_speed;
+	agent.accl_speed = other->accl_speed;
+	
+	agent.position = other->position;
+	
+	agent.velocity = other->velocity;
+	
+	agent.collision = other->collision;
+	
+	agent.rotation = other->rotation;
+	agent.mass = other->mass;
+	
+	agent.flags = other->flags;
+	
+	// TODO: properly copy the script!!!
+	agent.init_script = other->init_script;
+	agent.uninit_script = other->uninit_script;
+	agent.tick_script = other->tick_script;
+	agent.stimulus_script = other->stimulus_script;
+	agent.action_script = other->action_script;
+	
+	if (other->chemicals) {
+		agent.chemicals = goetia_chemical_CopyContainer(other->chemicals);
+	}
+	
+	return agent;
+}
+
 /// Frees up resources used by the agent.
 void goetia_agent_Delete(Agent* agent) {
 	// TODO: implement
@@ -277,6 +316,7 @@ void goetia_agent_PerformAction(Agent* agent) {
 		case ACTION_DEACTIVATE:
 		case ACTION_EAT:
 		case ACTION_HIT:
+	break;
 		case ACTION_LOOKAT:
 		case ACTION_REST:
 		case ACTION_APPROACH:

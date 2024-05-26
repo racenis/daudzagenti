@@ -67,6 +67,7 @@ typedef struct Agent {
 } Agent;
 
 Agent goetia_agent_New();
+Agent goetia_agent_Copy(Agent* agent);
 void goetia_agent_Delete(Agent* agent);
 
 Agent goetia_agent_AgentFromList(List* list);

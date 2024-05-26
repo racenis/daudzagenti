@@ -369,8 +369,7 @@ void goetia_ipc_ProcessServer() {
 				sprintf(msg, "ERROR Prototype '%s' not found!\r\nEND\r\n", name);
 				send_message(socket, msg);
 			} else {
-				// TODO: implement agent copying
-				Agent new_agent = *agent;
+				Agent new_agent = goetia_agent_Copy(agent);
 				
 				if (strcmp(type, "AT") == 0) {
 					char* x = strtok(NULL, delims);

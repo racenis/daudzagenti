@@ -107,7 +107,7 @@ void goetia_chemical_RegisterDefaultReactions() {
 	
 	// photsynthesis system 1 and 2
 	r(r11, CHEM_WATER, CHEM_ADP, CHEM_LIGHT, CHEM_OXYGEN, CHEM_ATP, 2, 3, 1, 3, 1, false)
-	r(r12, CHEM_CARBON_DIOXIDE, CHEM_ATP, CHEM_NONE, CHEM_GLUCOSE, CHEM_ADP, 6, 18, 1, 2, 1, false)
+	r(r12, CHEM_CARBON_DIOXIDE, CHEM_ATP, CHEM_NONE, CHEM_GLUCOSE, CHEM_ADP, 6, 18, 1, 18, 1, false)
 
 	// yeasting
 	r(r14, CHEM_PYRUVATE, CHEM_NONE, CHEM_NONE, CHEM_ETHANOL, CHEM_NONE, 1, 0, 1, 0, 1, false)
@@ -242,6 +242,19 @@ ChemContainer* goetia_chemical_MakeContainer() {
 	ChemContainer* container = malloc(sizeof(ChemContainer));
 	memset(container, 0, sizeof(ChemContainer));
 	container->properties = CHEM_ALLOW_SOLUBLE | CHEM_ALLOW_VOLATILE | CHEM_ALLOW_DIFFUSION;
+	return container;
+}
+
+/// Copies an existing chemical container.
+ChemContainer* goetia_chemical_CopyContainer(ChemContainer* other) {
+	ChemContainer* container = goetia_chemical_MakeContainer();
+	
+	// maybe switch to memcpy?
+	container->properties = other->properties;
+	for (int i = 0; i < chemical_count; i++) {
+		container->chems[i] = other->chems[i];
+	}
+	
 	return container;
 }
 

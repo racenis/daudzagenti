@@ -76,6 +76,7 @@ typedef struct ChemContainer {
 } ChemContainer;
 
 ChemContainer* goetia_chemical_MakeContainer();
+ChemContainer* goetia_chemical_CopyContainer(ChemContainer* container);
 ChemContainer* goetia_chemical_ListToContainer(List* list);
 void goetia_chemical_UpdateContainer(ChemContainer* container);
 int goetia_chemical_React(ChemContainer* container, chem chem1, chem chem2, chem prod);

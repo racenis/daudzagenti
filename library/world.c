@@ -226,6 +226,7 @@ sector_id goetia_world_InsertSector(Sector sector) {
 	// this bit here will check if there is any sector adjacent to this one,
 	// and if there are such sectors, they will be connected together.
 	
+	// TODO: completely replace this algorithm with something that is not bad
 	for (int sec = 1; sec < sector_count; sec++) {
 		int points_in_this = 0;
 		
@@ -236,7 +237,7 @@ sector_id goetia_world_InsertSector(Sector sector) {
 				Plane test_plane = get_plane(&sectors[sec], plane);
 				Vector3 test_point = get_point(&sector, point);
 				
-				if (plane_dist(test_plane, test_point) < 0.0f) {
+				if (plane_dist(test_plane, test_point) < -0.7f) {
 					fail++;
 				}
 			}
@@ -244,9 +245,10 @@ sector_id goetia_world_InsertSector(Sector sector) {
 			if (!fail) {
 				points_in_this++;
 			}
+
 		}
 		
-		if (points_in_this >= 4) {			
+		if (points_in_this >= 3) {			
 			// TODO: make this bit a bit nicer
 			int inserted = 0;
 			for (int i = 0; i < 6; i++) {
@@ -330,6 +332,7 @@ agent_id goetia_world_InjectAgent(Agent agent) {
 	}
 	
 	goetia_api_FireCallbackAgentMoved(agent.id, agent.position);
+	goetia_api_FireCallbackAgentRotated(agent.id, agent.rotation);
 	
 	return agent.id;
 }
@@ -448,11 +451,38 @@ static void apply_physics(Agent* agent) {
 	sector_id sector = 0;
 	
 	// add gravity
-	agent->velocity.y -= 0.01f;
+	bool on_floor = false;
+	for (Sector* sec = goetia_world_BeginSector(); sec; sec = goetia_world_NextSector(sec)) {
+		if (!(sec->flags & SECTOR_SOLID_FLOOR)) continue;
+		
+		// check if in sector
+		for (int p = 0; p < 6; p++) {
+			Plane plane = get_plane(sec, p);
+			
+			if (plane_dist(plane, agent->position) < 0.0f) {
+				goto next1;
+			}
+		}
+		
+		// check if in floor
+		Plane plane = get_plane(sec, 5);
+		float dist = plane_dist(plane, agent->position);
+		
+		if (dist < agent->collision.radius + 0.05f) {
+			on_floor = true;
+			break;
+		}
+next1:
+	}
+	
+	if (!on_floor) {
+		agent->velocity.y -= 0.001f;
+	}
+	
 	agent->position = goetia_vec3_add(agent->position, agent->velocity);
 	
 	for (Agent* other = goetia_world_BeginAgent(); other; other = goetia_world_NextAgent(other)) {
-		if (agent == other) continue;
+		if (agent == other || other->flags & FLAG_DEAD) continue;
 		
 		// this only does spherical collisions
 		// TODO: implement other collisions properly
@@ -469,6 +499,8 @@ static void apply_physics(Agent* agent) {
 			push_dir = goetia_vec3_mul(push_dir, goetia_vec3_scl(penetration));
 			
 			agent->position = goetia_vec3_add(agent->position, push_dir);
+			
+			agent->velocity.y = 0.0f; // TODO: fix
 			
 			Stimulus collision;
 			collision.type = 0;
@@ -680,7 +712,7 @@ void goetia_world_Tick() {
 		// TODO: put this in a seperate function
 		if (it->flags & FLAG_ALL_ENERGY) {
 			goetia_agent_PerformAction(it);
-		} else if (it->chemicals && it->chemicals->chems[CHEM_ATP]) {
+		} else if (it->chemicals && it->chemicals->chems[CHEM_ATP] && it->action.type) {
 			it->chemicals->chems[CHEM_ATP]--;
 			it->chemicals->chems[CHEM_ADP]++;
 			

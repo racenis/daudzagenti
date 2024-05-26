@@ -61,20 +61,15 @@ extern "C" void print_agent_model_set_callback(agent_id id, atom model) {
 }
 
 extern "C" void print_agent_model_scale(agent_id agent, float scale) {
-	// setting scale for a 3D model is not yet implemented in the graphics library
-	// TODO: when is implemented, fix this
-	/*if (all_agents[agent].model) {
-		all_agents[agent].model->SetScale(scale);
-	}*/
+	if (all_agents[agent].model) {
+		all_agents[agent].model->SetScale({scale, scale, scale});
+	}
 }
 
 extern "C" void print_agent_model_color(agent_id agent, float r, float g, float b) {
-	// graphics library supports setting color, but the RenderComponent API
-	// doesn't expose the option yet
-	// TODO: when is implemented, fix this
-	/*if (all_agents[agent].model) {
+	if (all_agents[agent].model) {
 		all_agents[agent].model->SetColor({r, g, b});
-	}*/
+	}
 }
 
 extern "C" void print_agent_model_animation(agent_id id, atom animation, int repeats) {
@@ -484,7 +479,7 @@ int main(int argc, const char** argv) {
 		}
 		
 		
-		
+		//Render::AddLineMarker(vec3(0.0f, 0.0f, 0.0f), Render::COLOR_YELLOW);
 		
 		
 		
